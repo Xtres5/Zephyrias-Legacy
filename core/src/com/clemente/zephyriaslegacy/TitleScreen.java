@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.clemente.zephyriaslegacy.Utils.Button;
 import com.clemente.zephyriaslegacy.Utils.Render;
 
 public class TitleScreen implements Screen {
@@ -17,6 +18,7 @@ public class TitleScreen implements Screen {
 	final MyGame game;
 	private Music music = Gdx.audio.newMusic(Gdx.files.internal("danzakuduro.mp3"));
 	private Viewport viewport;
+	private Button button;
 	
 	OrthographicCamera camera;
 	
@@ -25,17 +27,9 @@ public class TitleScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		this.button = new Button("Play");
 		Render.batch = game.batch;
 		}
-		
-	public void renderMenu(float delta) {
-		ScreenUtils.clear(0, 0, 0.2f, 1);
-		camera.update();
-		game.batch.begin();
-		game.batch.draw(titleScreenBackground, 0, 0);
-		game.batch.end();
-		
-	}
 
 	@Override
 	public void show() {
@@ -47,20 +41,12 @@ public class TitleScreen implements Screen {
 	public void render(float delta) {
 		ScreenUtils.clear(0, 0, 0.2f, 1);
 		camera.update();
+		
 		game.batch.begin();
 		game.batch.draw(titleScreenBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		game.batch.end();
 		
-		
-//		ScreenUtils.clear(0, 0, 0.2f, 1);
-//		camera.update();
-//		Render.batch.setProjectionMatrix(camera.combined);
-//		game.batch.setProjectionMatrix(camera.combined);
-//		
-//		Render.batch.begin();
-//		titleScreenBackground.draw(game.batch);
-//		Render.batch.end();
-		
+		button.render();
 	}
 
 	@Override
