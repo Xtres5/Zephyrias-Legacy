@@ -24,7 +24,7 @@ public class Button {
 		font.getData().setScale(4, 4);
 		button = new TextButton(text, textButtonStyle);
 		stage.addActor(button);
-		
+		Gdx.input.setInputProcessor(stage);
 	}
 	
 	

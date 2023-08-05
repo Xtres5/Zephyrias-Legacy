@@ -20,10 +20,11 @@ public class MyGame extends Game {
 	@Override
 	public void create () {
 		this.batch = new SpriteBatch();
-		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+
 		this.setScreen(new TitleScreen(this));  
+//		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 //		music = Gdx.audio.newMusic(Gdx.files.internal("danzakuduro.mp3"));
-		cardFront = new Sprite(new Texture("cardfront.png"));
+//		cardFront = new Sprite(new Texture("cardfront.png"));
 //		cardFront.setSize(300, 450);
 //		cardFront.setPosition(300f, 0f);
 //		cardBack = new Sprite(new Texture("cardback.png"));
