@@ -22,7 +22,7 @@ public class MyGame extends Game {
 		this.batch = new SpriteBatch();
 		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		this.setScreen(new TitleScreen(this));  
-		music = Gdx.audio.newMusic(Gdx.files.internal("danzakuduro.mp3"));
+//		music = Gdx.audio.newMusic(Gdx.files.internal("danzakuduro.mp3"));
 		cardFront = new Sprite(new Texture("cardfront.png"));
 //		cardFront.setSize(300, 450);
 //		cardFront.setPosition(300f, 0f);
@@ -30,8 +30,8 @@ public class MyGame extends Game {
 //		cardBack.setSize(300, 450);
 //		Render.batch = batch;
 		
-		music.setLooping(true);
-		music.play();
+//		music.setLooping(true);
+//		music.play();
 	}
 
 	@Override

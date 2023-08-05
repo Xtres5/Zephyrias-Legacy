@@ -16,9 +16,11 @@ import com.clemente.zephyriaslegacy.Utils.Render;
 public class TitleScreen implements Screen {
 	Texture titleScreenBackground = new Texture("titlescreen.png");
 	final MyGame game;
-	private Music music = Gdx.audio.newMusic(Gdx.files.internal("danzakuduro.mp3"));
+	private Music music = Gdx.audio.newMusic(Gdx.files.internal("titlescreenmusic.mp3"));
 	private Viewport viewport;
-	private Button button;
+	private Button playButton = new Button("play");
+	private Button configButton = new Button("Configuration");
+	private Button quitButton = new Button("Quit Game");
 	
 	OrthographicCamera camera;
 	
@@ -27,8 +29,10 @@ public class TitleScreen implements Screen {
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		this.button = new Button("Play");
 		Render.batch = game.batch;
+		positionateButtons();
+		music.setLooping(true);
+		music.play();
 		}
 
 	@Override
@@ -46,7 +50,9 @@ public class TitleScreen implements Screen {
 		game.batch.draw(titleScreenBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		game.batch.end();
 		
-		button.render();
+		playButton.render();
+		configButton.render();
+		quitButton.render();
 	}
 
 	@Override
@@ -75,7 +81,14 @@ public class TitleScreen implements Screen {
 
 	@Override
 	public void dispose() {
+		music.stop();
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void positionateButtons() {
+		playButton.setButtonPosition(Gdx.graphics.getWidth() / 2 - playButton.getButtonWidth() / 2, Gdx.graphics.getHeight() / 2 - playButton.getButtonHeight() / 2);
+		configButton.setButtonPosition(Gdx.graphics.getWidth() / 2 - configButton.getButtonWidth() / 2, Gdx.graphics.getHeight() / 2 - configButton.getButtonHeight() / 2 - 200);
+		quitButton.setButtonPosition(Gdx.graphics.getWidth() / 2 - quitButton.getButtonWidth() / 2, Gdx.graphics.getHeight() / 2 - quitButton.getButtonHeight() / 2 - 400);
 	}
 }

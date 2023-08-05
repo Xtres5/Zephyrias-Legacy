@@ -21,6 +21,7 @@ public class Button {
 		font = new BitmapFont();
 		textButtonStyle = new TextButtonStyle();
 		textButtonStyle.font = font;
+		font.getData().setScale(4, 4);
 		button = new TextButton(text, textButtonStyle);
 		stage.addActor(button);
 		
@@ -32,5 +33,16 @@ public class Button {
         stage.draw();
     }
 	
+	public void setButtonPosition(int x, int y) {
+		button.setPosition(x, y);
+	}
+	
+	public int getButtonHeight() {
+		return (int) button.getHeight();
+	}
+	
+	public int getButtonWidth() {
+		return (int) button.getWidth();
+	}
 
 }
