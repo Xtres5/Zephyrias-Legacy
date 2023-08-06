@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
@@ -21,40 +22,33 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.clemente.zephyriaslegacy.Utils.Button;
 import com.clemente.zephyriaslegacy.Utils.Render;
-import com.clemente.zephyriaslegacy.Cards.CardLoader;
 
 public class TitleScreen implements Screen {
-	Texture titleScreenBackground = new Texture("titlescreen.png");
+	Texture titleScreenBackground = new Texture("img/titlescreen.png");
 	final MyGame game;
-	private Music music = Gdx.audio.newMusic(Gdx.files.internal("titlescreenmusic.mp3"));
+	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/titlescreenmusic.mp3"));
 	private Viewport viewport;
 	private Stage stage;
 	private Table table;
 	private TextButtonStyle textButtonStyle;
 	private BitmapFont font;
-	
-
-	//private Button playButton = new Button("play");
-	//private Button configButton = new Button("Configuration");
-	//private Button quitButton  = new Button("Quit Game");
+	private Skin skin;
 	
 	OrthographicCamera camera;
 	
 	public TitleScreen(final MyGame game) {
 		this.game = game;
-				camera = new OrthographicCamera();
+		skin = new Skin(Gdx.files.internal("ui/glassy-ui.json"));
+		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Render.batch = game.batch;
 		viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		//positionateButtons();
 		music.setLooping(true);
 		music.play();
 		}
 
 	@Override
 	public void show() {	
-		
-		
 		stage = new Stage(viewport);
 		table = new Table();
 		stage.addActor(table);
@@ -68,7 +62,7 @@ public class TitleScreen implements Screen {
 				System.out.println("enjoy");
 				((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen(game));
 				dispose();
-								
+				Gdx.input.setInputProcessor(null);
 				}
 		});
 		
@@ -80,6 +74,7 @@ public class TitleScreen implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 				((Game)Gdx.app.getApplicationListener()).setScreen(new QuitScreen(game));
 				dispose();
+				Gdx.input.setInputProcessor(null);
 			}
 	});
 		Gdx.input.setInputProcessor(stage);
@@ -91,8 +86,8 @@ public class TitleScreen implements Screen {
 		textButtonStyle = new TextButtonStyle();
 		textButtonStyle.font = font;
 		font.getData().setScale(4, 4);
-		TextButton button = new TextButton(name,textButtonStyle );
-		table.add(button).width(700).height(60).padBottom(20);
+		TextButton button = new TextButton(name,skin); // importe una skin bien fea para testeo
+		table.add(button).width(300).height(60).padBottom(20);
 		table.row();
 		return button;
 		

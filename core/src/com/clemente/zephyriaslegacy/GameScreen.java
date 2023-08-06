@@ -1,6 +1,7 @@
 package com.clemente.zephyriaslegacy;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -13,10 +14,10 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.clemente.zephyriaslegacy.Cards.CardLoader;
 import com.clemente.zephyriaslegacy.Utils.Render;
 
-public class GameScreen implements Screen {
-	Texture GameScreenBackground = new Texture("GameScreenBackground.png");
+public class GameScreen implements Screen{
+	Texture GameScreenBackground = new Texture("img/GameScreenBackground.png");
 	final MyGame game;
-	private Music music = Gdx.audio.newMusic(Gdx.files.internal("danzakuduro.mp3"));
+	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/danzakuduro.mp3"));
 	private Viewport viewport;
 	private Stage stage;
 	private Table table;
@@ -28,6 +29,7 @@ public class GameScreen implements Screen {
 	public GameScreen(final MyGame game) {
 		this.game = game;
 		viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		viewport.apply(true);
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Render.batch = game.batch;
@@ -47,6 +49,10 @@ public class GameScreen implements Screen {
 	public void render(float delta) {
 		ScreenUtils.clear(0, 0, 0.2f, 1);
 		camera.update();
+		
+		
+		
+		
 		
 		game.batch.begin();
 		game.batch.draw(GameScreenBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -83,5 +89,7 @@ public class GameScreen implements Screen {
 		music.stop();
 		
 	}
+	}
 
-}
+
+

@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class QuitScreen implements Screen {
 	final MyGame game;
-	Texture quitscreen = new Texture("bomb.jpg");
-	private Music music = Gdx.audio.newMusic(Gdx.files.internal("bombsound.mp3"));
+	Texture quitscreen = new Texture("img/bomb.jpg");
+	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/bombsound.mp3"));
 	
 	public QuitScreen(final MyGame game) {
 		this.game = game;

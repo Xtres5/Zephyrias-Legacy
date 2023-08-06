@@ -14,7 +14,7 @@ public class CardLoader {
 				2, /*cardDamage*/
 				2, /*cardHealth*/
 				2, /*cardManaCost*/
-				new Sprite(new Texture("akali.jpg")) /*cardImage*/
+				new Sprite(new Texture("img/akali.jpg")) /*cardImage*/
 				);
 		cards[1] = new Card(
 				"Freddy", /*cardName*/
@@ -22,7 +22,7 @@ public class CardLoader {
 				1, /*cardDamage*/
 				3, /*cardHealth*/
 				2, /*cardManaCost*/
-				new Sprite(new Texture("cardback.png")) /*cardImage*/
+				new Sprite(new Texture("img/cardback.png")) /*cardImage*/
 				);
 
 		return cards;
