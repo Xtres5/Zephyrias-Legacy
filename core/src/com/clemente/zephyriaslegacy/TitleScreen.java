@@ -21,6 +21,7 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.clemente.zephyriaslegacy.Utils.Button;
 import com.clemente.zephyriaslegacy.Utils.Render;
+import com.clemente.zephyriaslegacy.Cards.CardLoader;
 
 public class TitleScreen implements Screen {
 	Texture titleScreenBackground = new Texture("titlescreen.png");
@@ -32,6 +33,7 @@ public class TitleScreen implements Screen {
 	private TextButtonStyle textButtonStyle;
 	private BitmapFont font;
 	
+
 	//private Button playButton = new Button("play");
 	//private Button configButton = new Button("Configuration");
 	//private Button quitButton  = new Button("Quit Game");
@@ -40,7 +42,7 @@ public class TitleScreen implements Screen {
 	
 	public TitleScreen(final MyGame game) {
 		this.game = game;
-		camera = new OrthographicCamera();
+				camera = new OrthographicCamera();
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Render.batch = game.batch;
 		viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -66,7 +68,7 @@ public class TitleScreen implements Screen {
 				System.out.println("enjoy");
 				((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen(game));
 				dispose();
-				
+								
 				}
 		});
 		
@@ -76,9 +78,8 @@ public class TitleScreen implements Screen {
 		AgregarBoton("Salir").addListener(new ClickListener() {
 			@Override		
 			public void clicked(InputEvent event, float x, float y) {
-				
-				
-				Gdx.app.exit();
+				((Game)Gdx.app.getApplicationListener()).setScreen(new QuitScreen(game));
+				dispose();
 			}
 	});
 		Gdx.input.setInputProcessor(stage);

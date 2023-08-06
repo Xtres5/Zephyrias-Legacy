@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.clemente.zephyriaslegacy.Cards.CardLoader;
 import com.clemente.zephyriaslegacy.Utils.Render;
 
 public class GameScreen implements Screen {
@@ -19,6 +20,8 @@ public class GameScreen implements Screen {
 	private Viewport viewport;
 	private Stage stage;
 	private Table table;
+	CardLoader cardloader = new CardLoader();
+	Card cards[] = cardloader.cardLoader();
 	
 	OrthographicCamera camera;
 	
@@ -30,6 +33,7 @@ public class GameScreen implements Screen {
 		Render.batch = game.batch;
 		music.setLooping(true);
 		music.play();
+		
 		}
 	
 	
@@ -46,6 +50,7 @@ public class GameScreen implements Screen {
 		
 		game.batch.begin();
 		game.batch.draw(GameScreenBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		cards[0].render();
 		game.batch.end();
 	}
 

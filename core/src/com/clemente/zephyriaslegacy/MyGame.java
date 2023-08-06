@@ -12,27 +12,15 @@ import com.clemente.zephyriaslegacy.Utils.Render;
 
 public class MyGame extends Game {
 	SpriteBatch batch;
-	Sprite cardFront;			
+	Sprite cardFront;
 	Sprite cardBack;
-	Music music;
-	//Card card = new Card();
 	
 	@Override
 	public void create () {
 		this.batch = new SpriteBatch();
-
-		this.setScreen(new TitleScreen(this));  
-//		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-//		music = Gdx.audio.newMusic(Gdx.files.internal("danzakuduro.mp3"));
-//		cardFront = new Sprite(new Texture("cardfront.png"));
-//		cardFront.setSize(300, 450);
-//		cardFront.setPosition(300f, 0f);
-//		cardBack = new Sprite(new Texture("cardback.png"));
-//		cardBack.setSize(300, 450);
-//		Render.batch = batch;
+		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+		this.setScreen(new TitleScreen(this));
 		
-//		music.setLooping(true);
-//		music.play();
 	}
 
 	@Override
