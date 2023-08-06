@@ -12,7 +12,7 @@ import com.clemente.zephyriaslegacy.Utils.Render;
 
 public class MyGame extends Game {
 	SpriteBatch batch;
-	Sprite cardFront;
+	Sprite cardFront;			
 	Sprite cardBack;
 	Music music;
 	//Card card = new Card();
