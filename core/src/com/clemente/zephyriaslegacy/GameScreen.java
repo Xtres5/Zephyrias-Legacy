@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.clemente.zephyriaslegacy.Utils.Render;
 import com.clemente.zephyriaslegacy.Cards.Card;
-import com.clemente.zephyriaslegacy.Cards.Akali;
+import com.clemente.zephyriaslegacy.Cards.Cards.Akali;
 
 public class GameScreen implements Screen{
 	Texture GameScreenBackground = new Texture("img/GameScreenBackground.png");
