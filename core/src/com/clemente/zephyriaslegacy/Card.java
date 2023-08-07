@@ -17,12 +17,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Card {
 	Image image;
-	public String cardName;
-	public String cardDescription;
-	public int cardDamage;
-	public int cardHealth;
-	public int cardManaCost;
-	public Texture cardFrame;
+	public String name;
+	public String description;
+	public int damage;
+	public int health;
+	public int manaCost;
+	public Texture cardFrame = new Texture("img/cardframe.png");
 	public Texture cardImage;
 //	private boolean selected;
 //	private float x, y;
@@ -30,14 +30,14 @@ public class Card {
 //	private Stage stage;
 	private Skin skin;
 	
-	public Card(String cardName, String cardDescription, int cardDamage, int cardHealth, int cardManaCost, Texture cardImage, Stage stage) {
+	public Card(String name, String description, int damage, int health, int manaCost, Texture cardImage, Stage stage) {
 	
 		image = new Image(cardImage);
-		this.cardName = cardName;
-		this.cardDescription = cardDescription;
-		this.cardDamage = cardDamage;
-		this.cardHealth = cardHealth;
-		this.cardManaCost = cardManaCost;
+		this.name = name;
+		this.description = description;
+		this.damage = damage;
+		this.health = health;
+		this.manaCost = manaCost;
 		this.cardImage = cardImage;
 		
 		
@@ -54,29 +54,31 @@ public class Card {
 		table.row(); 
 
 		table.add(); 
-		table.add("image").growX().height(Value.percentHeight(.5f).get(image) - 75)
-        .getActor().setAlignment(Align.center); 
+		table.add(image).growX().height(Value.percentHeight(.5f).get(image) - 75)
+        .getActor().setAlign(Align.center); 
 		table.add(); //col3
 		table.row(); 
 
 		table.add();
-		table.add("title").grow().getActor().setAlignment(Align.center);
+		table.add("title").grow().height(40).getActor().setAlignment(Align.center);
 		table.add();
 		table.row();
 
 		table.add();
-		table.add(cardDescription).grow().getActor().setAlignment(Align.center);;
+		table.add(description).grow().getActor().setAlignment(Align.center);;
 		table.add();
 		table.row();
 
-		table.add("life").width(75).height(75).getActor().setAlignment(Align.center);
-		table.add("class").growX().fillY().getActor().setAlignment(Align.center);
 		table.add("attack").width(75).height(75).getActor().setAlignment(Align.center);
+		table.add("class").growX().fillY().getActor().setAlignment(Align.center);
+		table.add("life").width(75).height(75).getActor().setAlignment(Align.center);
 			
-		table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("img/cardframe.png"))));
-		table.setPosition(Gdx.graphics.getWidth() /2, Gdx.graphics.getHeight()/2 );
+		table.setBackground(new TextureRegionDrawable(new TextureRegion(cardFrame)));
+
+		table.pack();
+		table.setPosition(Gdx.graphics.getWidth() /2 - cardGetWidth() / 2, Gdx.graphics.getHeight()/2 - cardGetHeight() / 2);
 		stage.addActor(table);
-		stage.setDebugAll(true);
+//		stage.setDebugAll(true);
 		
 // cuando lo renderizo se pone en blanco
 		
@@ -84,9 +86,15 @@ public class Card {
 	
 	
 	public void attack(int cardDamage, int cardHealth, Card attackedCard) {
-		attackedCard.cardHealth -= cardDamage;
-		cardHealth -= attackedCard.cardDamage;
+		attackedCard.health -= cardDamage;
+		cardHealth -= attackedCard.health;
 	}
 	
-
+	public int cardGetHeight() {
+		return cardFrame.getHeight();
+	}
+	
+	public int cardGetWidth() {
+		return cardFrame.getWidth();
+	}
 }

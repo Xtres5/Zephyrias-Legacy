@@ -11,58 +11,33 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.clemente.zephyriaslegacy.Utils.Render;
+import com.clemente.zephyriaslegacy.Utils.CardLoader;
 
 public class GameScreen implements Screen{
 	Texture GameScreenBackground = new Texture("img/GameScreenBackground.png");
 	final MyGame game;
 	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/danzakuduro.mp3"));
 	private Viewport viewport;
-//	CardLoader cardloader = new CardLoader();
-	Card cards[];
+	CardLoader cardloader = new CardLoader(); 
 	Stage stage;
-	
-	
+	Card cards[] = new Card[2];
 	OrthographicCamera camera;
 	
 	public GameScreen(final MyGame game) {
 		this.game = game;
 		stage = new Stage();
-		crearCarta();
-		viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		viewport = new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		viewport.apply(true);
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Render.batch = game.batch;
 		music.setLooping(true);
 		music.play();
-		
+		Card cards[] = cardloader.cardLoader(stage);
 		}
-	
-	private void crearCarta () {
-		
-		cards = new Card[2]; 
-		cards[0] = new Card(
-				"Jeff", /*cardName*/
-				"es jeff", /*cardDescription*/	
-				2, /*cardDamage*/
-				2, /*cardHealth*/
-				2, /*cardManaCost*/
-				new Texture("img/akali.jpg") /*cardImage*/,
-				stage
-				);
-//		cards[1] = new Card(
-//				"lol", /*cardName*/
-//				"dea", /*cardDescription*/	
-//				2, /*cardDamage*/
-//				2, /*cardHealth*/
-//				2, /*cardManaCost*/
-//				new Texture("img/cardback.png") /*cardImage*/,
-//				stage
-//				);
-		
-	}
 		
 	
 	
@@ -76,9 +51,8 @@ public class GameScreen implements Screen{
 	public void render(float delta) {
 		ScreenUtils.clear(0, 0, 0.2f, 1);
 		camera.update();
-		
 		game.batch.begin();
-		game.batch.draw(GameScreenBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		game.batch.draw(GameScreenBackground, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
 		game.batch.end();
 		stage.act();
 		stage.draw();
