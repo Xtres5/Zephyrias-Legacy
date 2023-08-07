@@ -24,10 +24,10 @@ public class Card {
 	public int cardManaCost;
 	public Texture cardFrame;
 	public Texture cardImage;
-	private boolean selected;
-	private float x, y;
+//	private boolean selected;
+//	private float x, y;
 	private Table table;
-	private Stage stage;
+//	private Stage stage;
 	private Skin skin;
 	
 	public Card(String cardName, String cardDescription, int cardDamage, int cardHealth, int cardManaCost, Texture cardImage, Stage stage) {
@@ -48,30 +48,31 @@ public class Card {
 		table.setFillParent(false);
 	
 	
-		table.add(cardName); 
+		table.add("Coste").width(75).height(75).getActor().setAlignment(Align.center); 
 		table.add(); 
-		table.add("s"); //col3
+		table.add("s").width(75).height(75).getActor().setAlignment(Align.center); //col3
 		table.row(); 
 
 		table.add(); 
-		table.add("image"); 
+		table.add("image").growX().height(Value.percentHeight(.5f).get(image) - 75)
+        .getActor().setAlignment(Align.center); 
 		table.add(); //col3
 		table.row(); 
 
 		table.add();
-		table.add("title");
+		table.add("title").grow().getActor().setAlignment(Align.center);
 		table.add();
 		table.row();
 
 		table.add();
-		table.add(cardDescription);
+		table.add(cardDescription).grow().getActor().setAlignment(Align.center);;
 		table.add();
 		table.row();
 
-		table.add("life");
-		table.add("class");
-		table.add("attack");
-		
+		table.add("life").width(75).height(75).getActor().setAlignment(Align.center);
+		table.add("class").growX().fillY().getActor().setAlignment(Align.center);
+		table.add("attack").width(75).height(75).getActor().setAlignment(Align.center);
+			
 		table.setBackground(new TextureRegionDrawable(new TextureRegion(new Texture("img/cardframe.png"))));
 		table.setPosition(Gdx.graphics.getWidth() /2, Gdx.graphics.getHeight()/2 );
 		stage.addActor(table);
