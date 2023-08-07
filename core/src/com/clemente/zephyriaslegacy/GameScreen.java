@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.clemente.zephyriaslegacy.Utils.Render;
 import com.clemente.zephyriaslegacy.Cards.Card;
 import com.clemente.zephyriaslegacy.Cards.Cards.Akali;
+import com.clemente.zephyriaslegacy.Cards.Deck;
 
 public class GameScreen implements Screen{
 	Texture GameScreenBackground = new Texture("img/GameScreenBackground.png");
@@ -36,6 +37,7 @@ public class GameScreen implements Screen{
 		Render.batch = game.batch;
 		music.setLooping(true);
 		music.play();
+		Player test = new Player();
 		}
 		
 	

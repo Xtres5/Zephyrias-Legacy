@@ -8,7 +8,7 @@ public class Veigar extends Card {
 
 	public Veigar() {
 		super.name = "veigar";
-		super.description = "minion creater";
+		super.description = "minion creator";
 		super.damage = 10000;
 		super.health = 1;
 		super.manaCost = 4;
