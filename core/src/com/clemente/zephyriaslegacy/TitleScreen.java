@@ -59,7 +59,6 @@ public class TitleScreen implements Screen {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				
-				System.out.println("enjoy");
 				((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen(game));
 				dispose();
 				Gdx.input.setInputProcessor(null);
@@ -68,7 +67,11 @@ public class TitleScreen implements Screen {
 		
 		
 		AgregarBoton("Opciones");
+		
+		
 		AgregarBoton("Creditos");
+		
+		
 		AgregarBoton("Salir").addListener(new ClickListener() {
 			@Override		
 			public void clicked(InputEvent event, float x, float y) {
@@ -82,10 +85,10 @@ public class TitleScreen implements Screen {
 
 	private TextButton AgregarBoton(String name) {
 		
-		font = new BitmapFont();
-		textButtonStyle = new TextButtonStyle();
-		textButtonStyle.font = font;
-		font.getData().setScale(4, 4);
+//		font = new BitmapFont();
+//		textButtonStyle = new TextButtonStyle();
+//		textButtonStyle.font = font;
+//		font.getData().setScale(4, 4);
 		TextButton button = new TextButton(name,skin); // importe una skin bien fea para testeo
 		table.add(button).width(300).height(60).padBottom(20);
 		table.row();

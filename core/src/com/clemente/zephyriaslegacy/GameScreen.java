@@ -6,12 +6,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.clemente.zephyriaslegacy.Cards.CardLoader;
 import com.clemente.zephyriaslegacy.Utils.Render;
 
 public class GameScreen implements Screen{
@@ -19,15 +19,17 @@ public class GameScreen implements Screen{
 	final MyGame game;
 	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/danzakuduro.mp3"));
 	private Viewport viewport;
-	private Stage stage;
-	private Table table;
-	CardLoader cardloader = new CardLoader();
-	Card cards[] = cardloader.cardLoader();
+//	CardLoader cardloader = new CardLoader();
+	Card cards[];
+	Stage stage;
+	
 	
 	OrthographicCamera camera;
 	
 	public GameScreen(final MyGame game) {
 		this.game = game;
+		stage = new Stage();
+		crearCarta();
 		viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		viewport.apply(true);
 		camera = new OrthographicCamera();
@@ -37,6 +39,31 @@ public class GameScreen implements Screen{
 		music.play();
 		
 		}
+	
+	private void crearCarta () {
+		
+		cards = new Card[2]; 
+		cards[0] = new Card(
+				"Jeff", /*cardName*/
+				"es jeff", /*cardDescription*/	
+				2, /*cardDamage*/
+				2, /*cardHealth*/
+				2, /*cardManaCost*/
+				new Texture("img/akali.jpg") /*cardImage*/,
+				stage
+				);
+//		cards[1] = new Card(
+//				"lol", /*cardName*/
+//				"dea", /*cardDescription*/	
+//				2, /*cardDamage*/
+//				2, /*cardHealth*/
+//				2, /*cardManaCost*/
+//				new Texture("img/cardback.png") /*cardImage*/,
+//				stage
+//				);
+		
+	}
+		
 	
 	
 	@Override
@@ -50,15 +77,14 @@ public class GameScreen implements Screen{
 		ScreenUtils.clear(0, 0, 0.2f, 1);
 		camera.update();
 		
-		
-		
-		
-		
 		game.batch.begin();
 		game.batch.draw(GameScreenBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		cards[0].render();
 		game.batch.end();
+		stage.act();
+		stage.draw();
+		
 	}
+
 
 	@Override
 	public void resize(int width, int height) {

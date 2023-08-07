@@ -18,9 +18,7 @@ public class QuitScreen implements Screen {
 	};
 	@Override
 	public void show() {
-		if (music.isPlaying() == false) {
-			Gdx.app.exit();
-		}
+		
 	}
 
 	@Override
@@ -28,6 +26,11 @@ public class QuitScreen implements Screen {
 		game.batch.begin();
 		game.batch.draw(quitscreen, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		game.batch.end();
+		
+		if (music.isPlaying() == false) {
+			Gdx.app.exit();
+		
+		}
 	}
 
 	@Override
