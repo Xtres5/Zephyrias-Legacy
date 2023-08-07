@@ -14,16 +14,16 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.clemente.zephyriaslegacy.Utils.Render;
-import com.clemente.zephyriaslegacy.Utils.CardLoader;
+import com.clemente.zephyriaslegacy.Cards.Card;
+import com.clemente.zephyriaslegacy.Cards.Akali;
 
 public class GameScreen implements Screen{
 	Texture GameScreenBackground = new Texture("img/GameScreenBackground.png");
 	final MyGame game;
 	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/danzakuduro.mp3"));
 	private Viewport viewport;
-	CardLoader cardloader = new CardLoader(); 
 	Stage stage;
-	Card cards[] = new Card[2];
+	Akali akali = new Akali();
 	OrthographicCamera camera;
 	
 	public GameScreen(final MyGame game) {
@@ -36,7 +36,6 @@ public class GameScreen implements Screen{
 		Render.batch = game.batch;
 		music.setLooping(true);
 		music.play();
-		Card cards[] = cardloader.cardLoader(stage);
 		}
 		
 	
@@ -54,8 +53,7 @@ public class GameScreen implements Screen{
 		game.batch.begin();
 		game.batch.draw(GameScreenBackground, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
 		game.batch.end();
-		stage.act();
-		stage.draw();
+		akali.cardDraw();
 		
 	}
 

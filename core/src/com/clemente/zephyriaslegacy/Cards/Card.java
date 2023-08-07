@@ -1,4 +1,4 @@
-package com.clemente.zephyriaslegacy;
+package com.clemente.zephyriaslegacy.Cards;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -26,21 +26,38 @@ public class Card {
 	public Texture cardImage;
 //	private boolean selected;
 //	private float x, y;
-	private Table table;
-//	private Stage stage;
-	private Skin skin;
+	protected Table table;
+	protected Stage stage = new Stage();
+	protected Skin skin;
 	
-	public Card(String name, String description, int damage, int health, int manaCost, Texture cardImage, Stage stage) {
+
 	
-		image = new Image(cardImage);
+	
+	public Card() {
+		super();
 		this.name = name;
 		this.description = description;
 		this.damage = damage;
 		this.health = health;
 		this.manaCost = manaCost;
-		this.cardImage = cardImage;
-		
-		
+	}
+
+	public void attack(int cardDamage, int cardHealth, Card attackedCard) {
+		attackedCard.health -= cardDamage;
+		cardHealth -= attackedCard.health;
+	}
+	
+	public int cardGetHeight() {
+		return cardFrame.getHeight();
+	}
+	
+	public int cardGetWidth() {
+		return cardFrame.getWidth();
+	}
+	
+	
+
+	public void createCard(Stage stage) {
 		skin = new Skin(Gdx.files.internal("ui/glassy-ui.json"));
 //		table.addActor(image);
 		table = new Table(skin);
@@ -81,20 +98,10 @@ public class Card {
 //		stage.setDebugAll(true);
 		
 // cuando lo renderizo se pone en blanco
-		
 	}
 	
-	
-	public void attack(int cardDamage, int cardHealth, Card attackedCard) {
-		attackedCard.health -= cardDamage;
-		cardHealth -= attackedCard.health;
-	}
-	
-	public int cardGetHeight() {
-		return cardFrame.getHeight();
-	}
-	
-	public int cardGetWidth() {
-		return cardFrame.getWidth();
+	public void cardDraw() {
+		stage.act();
+		stage.draw();
 	}
 }
