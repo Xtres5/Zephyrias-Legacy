@@ -4,7 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
@@ -12,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.badlogic.gdx.utils.Align;
 import com.clemente.zephyriaslegacy.Utils.Render;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -25,7 +29,7 @@ public abstract class Card {
 	public Texture cardFrame = new Texture("img/cardframe.png");
 	public Texture cardImage;
 //	private boolean selected;
-//	private float x, y;
+	private float x, y;
 	protected Table table;
 	protected Stage stage = new Stage();
 	protected Skin skin;
@@ -62,12 +66,13 @@ public abstract class Card {
 //		table.addActor(image);
 		table = new Table(skin);
 		
+		
 		table.setFillParent(false);
 	
 	
 		table.add(Integer.toString(manaCost)).width(75).height(75).getActor().setAlignment(Align.center); 
 		table.add(); 
-		table.add("s").width(75).height(75).getActor().setAlignment(Align.center); //col3
+		table.add("").width(75).height(75).getActor().setAlignment(Align.center); //col3
 		table.row(); 
 
 		table.add();
@@ -87,7 +92,7 @@ public abstract class Card {
 		table.row();
 
 		table.add(Integer.toString(damage)).width(75).height(75).getActor().setAlignment(Align.center);
-		table.add("class").growX().fillY().getActor().setAlignment(Align.center);
+		table.add("Heroe").growX().fillY().getActor().setAlignment(Align.center);
 		table.add(Integer.toString(health)).width(75).height(75).getActor().setAlignment(Align.center);
 			
 		table.setBackground(new TextureRegionDrawable(new TextureRegion(cardFrame)));
