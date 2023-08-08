@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
+//Clase boton que realmente no usamos ya que, ya existe text Button que fue implementado directamente en la title screen
+
 public class Button {
 	Stage stage;
 	TextButton button;

@@ -27,7 +27,7 @@ import com.clemente.zephyriaslegacy.Utils.Render;
 public class TitleScreen implements Screen {
 	Texture titleScreenBackground = new Texture("img/titlescreen.png");
 	final MyGame game;
-	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/titlescreenmusic.mp3"));
+	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/titlescreenmusic.mp3")); //best music
 	private Stage stage;
 	private Table table;
 	private TextButtonStyle textButtonStyle;
@@ -52,8 +52,8 @@ public class TitleScreen implements Screen {
 		table = new Table();
 		stage.addActor(table);
 		table.setFillParent(true);
-		
-		
+		//creo table que contenga los 4 botones
+		//añado los listeners a los botones para que me identifique el mouse
 		AgregarBoton("Jugar").addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -66,7 +66,7 @@ public class TitleScreen implements Screen {
 		
 		
 		AgregarBoton("Opciones");
-		
+		//mas tarde se agregaran estas dos screens con sus respectivas interfaces
 		
 		AgregarBoton("Creditos");
 		
@@ -87,19 +87,20 @@ public class TitleScreen implements Screen {
 		table.add(button).width(300).height(60).padBottom(20);
 		table.row();
 		return button;
-		
+		//este metodo sirve para crear los botones y para que cuando los llame se agreguen a una table
 	}
 	
 	
 	
 	@Override
 	public void render(float delta) {
+		//limpiamos la screen
 		ScreenUtils.clear(0, 0, 0.2f, 1);
 		
 		game.batch.begin();
 		game.batch.draw(titleScreenBackground, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
 		game.batch.end();
-		
+		//renderizamos y dibujamos el stage
 		stage.act();
 		
 		stage.draw();

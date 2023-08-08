@@ -28,8 +28,6 @@ public abstract class Card {
 	public int manaCost;
 	public Texture cardFrame = new Texture("img/cardframe.png");
 	public Texture cardImage;
-//	private boolean selected;
-	private float x, y;
 	protected Table table;
 	protected Stage stage = new Stage();
 	protected Skin skin;
@@ -63,22 +61,22 @@ public abstract class Card {
 
 	public void createCard(Stage stage, String name, String description, int damage, int health, int manaCost) {
 		skin = new Skin(Gdx.files.internal("ui/glassy-ui.json"));
-//		table.addActor(image);
 		table = new Table(skin);
 		
+		// Creo la table que funciona como la estructura de la carta
 		
 		table.setFillParent(false);
 	
 	
 		table.add(Integer.toString(manaCost)).width(75).height(75).getActor().setAlignment(Align.center); 
 		table.add(); 
-		table.add("").width(75).height(75).getActor().setAlignment(Align.center); //col3
+		table.add("").width(75).height(75).getActor().setAlignment(Align.center); 
 		table.row(); 
 
 		table.add();
 		table.add(image).growX().height(Value.percentHeight(1f).get(image) - 75)
         .getActor().setAlign(Align.center); 
-		table.add(); //col3
+		table.add();
 		table.row(); 
 
 		table.add();
@@ -95,14 +93,14 @@ public abstract class Card {
 		table.add("Heroe").growX().fillY().getActor().setAlignment(Align.center);
 		table.add(Integer.toString(health)).width(75).height(75).getActor().setAlignment(Align.center);
 			
+		// establezco el background que tiene que ser una textura drawable para no usar una skin.
 		table.setBackground(new TextureRegionDrawable(new TextureRegion(cardFrame)));
-
+		
 		table.pack();
 		table.setPosition(Gdx.graphics.getWidth() /2 - cardGetWidth() / 2, Gdx.graphics.getHeight()/2 - cardGetHeight() / 2);
 		stage.addActor(table);
 		stage.setDebugAll(true);
 		
-// cuando lo renderizo se pone en blanco
 	}
 	
 	public void cardDraw() {

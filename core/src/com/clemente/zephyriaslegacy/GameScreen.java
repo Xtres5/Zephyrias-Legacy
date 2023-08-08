@@ -57,7 +57,7 @@ public class GameScreen implements Screen{
 //		        }
 //			});
 //		Gdx.input.setInputProcessor(stage);
-		//Testing
+		//Testeando si me identifica el mouse al tocar la table por ahora no lo usamos mas 
 	}
 	
 	@Override
