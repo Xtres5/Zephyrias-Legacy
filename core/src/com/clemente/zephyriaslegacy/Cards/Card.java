@@ -19,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public abstract class Card {
+public abstract class Card extends Table {
 	protected Image image;
 	public String name;
 	public String description;
@@ -28,20 +28,53 @@ public abstract class Card {
 	public int manaCost;
 	public Texture cardFrame = new Texture("img/cardframe.png");
 	public Texture cardImage;
-	protected Table table;
-	protected Stage stage = new Stage();
 	protected Skin skin;
+	
 	
 
 	
 	
-	public Card() {
-//		super();
-//		this.name = name;
-//		this.description = description;
-//		this.damage = damage;
-//		this.health = health;
-//		this.manaCost = manaCost;
+	public Card(String name, String description, int damage, int health, int manaCost, Image image) {
+
+		super(new Skin(Gdx.files.internal("ui/glassy-ui.json")));
+		this.image = image;
+		
+		setFillParent(false);
+		
+		
+		add(Integer.toString(manaCost)).width(75).height(75).getActor().setAlignment(Align.center); 
+		add(); 
+		add("").width(75).height(75).getActor().setAlignment(Align.center); 
+		row(); 
+
+		add();
+		add(image).growX().height(Value.percentHeight(1f).get(image) - 75)
+        .getActor().setAlign(Align.center); 
+		add();
+		row(); 
+
+		add();
+		add(name).grow().height(40).getActor().setAlignment(Align.center);
+		add();
+		row();
+
+		add();
+		add(description).grow().getActor().setAlignment(Align.center);;
+		add();
+		row();
+
+		add(Integer.toString(damage)).width(75).height(75).getActor().setAlignment(Align.center);
+		add("Heroe").growX().fillY().getActor().setAlignment(Align.center);
+		add(Integer.toString(health)).width(75).height(75).getActor().setAlignment(Align.center);
+			
+		// establezco el background que tiene que ser una textura drawable para no usar una skin.
+		setBackground(new TextureRegionDrawable(new TextureRegion(cardFrame)));
+		
+		pack();
+		setPosition(Gdx.graphics.getWidth() /2 - cardGetWidth() / 2, Gdx.graphics.getHeight()/2 - cardGetHeight() / 2);
+	
+		setDebug(true);
+
 	}
 
 	public void attack(int cardDamage, int cardHealth, Card attackedCard) {
@@ -58,53 +91,7 @@ public abstract class Card {
 	}
 	
 	
-
-	public void createCard(Stage stage, String name, String description, int damage, int health, int manaCost) {
-		skin = new Skin(Gdx.files.internal("ui/glassy-ui.json"));
-		table = new Table(skin);
-		
-		// Creo la table que funciona como la estructura de la carta
-		
-		table.setFillParent(false);
-	
-	
-		table.add(Integer.toString(manaCost)).width(75).height(75).getActor().setAlignment(Align.center); 
-		table.add(); 
-		table.add("").width(75).height(75).getActor().setAlignment(Align.center); 
-		table.row(); 
-
-		table.add();
-		table.add(image).growX().height(Value.percentHeight(1f).get(image) - 75)
-        .getActor().setAlign(Align.center); 
-		table.add();
-		table.row(); 
-
-		table.add();
-		table.add(name).grow().height(40).getActor().setAlignment(Align.center);
-		table.add();
-		table.row();
-
-		table.add();
-		table.add(description).grow().getActor().setAlignment(Align.center);;
-		table.add();
-		table.row();
-
-		table.add(Integer.toString(damage)).width(75).height(75).getActor().setAlignment(Align.center);
-		table.add("Heroe").growX().fillY().getActor().setAlignment(Align.center);
-		table.add(Integer.toString(health)).width(75).height(75).getActor().setAlignment(Align.center);
-			
-		// establezco el background que tiene que ser una textura drawable para no usar una skin.
-		table.setBackground(new TextureRegionDrawable(new TextureRegion(cardFrame)));
-		
-		table.pack();
-		table.setPosition(Gdx.graphics.getWidth() /2 - cardGetWidth() / 2, Gdx.graphics.getHeight()/2 - cardGetHeight() / 2);
-		stage.addActor(table);
-		stage.setDebugAll(true);
-		
-	}
-	
 	public void cardDraw() {
-		stage.act();
-		stage.draw();
+
 	}
 }

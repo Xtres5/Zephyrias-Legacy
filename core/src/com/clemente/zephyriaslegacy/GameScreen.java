@@ -24,24 +24,29 @@ import com.clemente.zephyriaslegacy.Cards.Deck;
 public class GameScreen implements Screen{
 	Texture GameScreenBackground = new Texture("img/GameScreenBackground.png");
 	final MyGame game;
-	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/danzakuduro.mp3"));
+//	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/danzakuduro.mp3"));
 	private Viewport viewport;
 	Stage stage;
 	Table table;
-	Akali akali = new Akali();
+	Board board;
+	Akali akali;
 	OrthographicCamera camera;
 	
 	public GameScreen(final MyGame game) {
 		this.game = game;
-		stage = new Stage();
-		table = new Table();
 		viewport = new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		viewport.apply(true);
+		stage = new Stage(viewport);
+		table = new Table();
+		board = new Board();
+		akali = new Akali();
+		stage.addActor(akali);
+		stage.addActor(board);
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Render.batch = game.batch;
-		music.setLooping(true);
-		music.play();
+//		music.setLooping(true);
+//		music.play();
 		Player test = new Player();
 		}
 		
@@ -68,7 +73,8 @@ public class GameScreen implements Screen{
 		game.batch.draw(GameScreenBackground, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
 		game.batch.end();
 		akali.cardDraw();
-		
+		stage.act();
+		stage.draw();
 		
 	}
 
@@ -99,7 +105,7 @@ public class GameScreen implements Screen{
 
 	@Override
 	public void dispose() {
-		music.stop();
+//		music.stop();
 		
 	}
 	}

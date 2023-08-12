@@ -10,14 +10,12 @@ public class Akali extends Card {
 	
 	
 	public Akali() {
-		super.name = "akali";
-		super.description = "minion verde";
-		super.damage = 3;
-		super.health = 4;
-		super.manaCost = 4;
-		cardImage = new Texture("img/akali.jpg");
-		image = new Image(cardImage);
-		super.createCard(stage, name, description, damage, health, manaCost);
+		super("akali", "minion verde", 3, 4, 4,new Image(new Texture("img/akali.jpg")));
+		;
+	
+		
+		
+		
 	}
 	
 	public void ability(Card card) {

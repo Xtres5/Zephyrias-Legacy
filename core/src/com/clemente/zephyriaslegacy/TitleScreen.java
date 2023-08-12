@@ -30,8 +30,6 @@ public class TitleScreen implements Screen {
 	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/titlescreenmusic.mp3")); //best music
 	private Stage stage;
 	private Table table;
-	private TextButtonStyle textButtonStyle;
-	private BitmapFont font;
 	private Skin skin;
 	private Viewport viewport;
 	OrthographicCamera camera;
@@ -102,7 +100,6 @@ public class TitleScreen implements Screen {
 		game.batch.end();
 		//renderizamos y dibujamos el stage
 		stage.act();
-		
 		stage.draw();
 	}
 

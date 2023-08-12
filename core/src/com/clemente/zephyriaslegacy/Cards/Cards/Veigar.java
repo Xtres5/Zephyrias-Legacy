@@ -7,14 +7,8 @@ import com.clemente.zephyriaslegacy.Cards.Card;
 public class Veigar extends Card {
 
 	public Veigar() {
-		super.name = "veigar";
-		super.description = "minion creator";
-		super.damage = 10000;
-		super.health = 1;
-		super.manaCost = 4;
-		cardImage = new Texture("img/akali.jpg");
-		image = new Image(cardImage);
-		super.createCard(stage, name, description, damage, health, manaCost);
+		super( "veigar","minion creator", 10000,1, 4, new Image(new Texture("img/akali.jpg")));
+	
 		
 	}
 	
