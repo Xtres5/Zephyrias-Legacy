@@ -22,23 +22,31 @@ public class Board extends Table {
 		skin = new Skin(Gdx.files.internal("ui/glassy-ui.json"));
 		
 		setFillParent(true);
-	
-	
-		add().width(25); 
-		add().width(25); 
-		add().width(25); 
-		add().width(25); 
-		row().height(100); 
+		row().height((Gdx.graphics.getHeight() - 550) / 2);
 
 
-		row().width(25).height(100); 
+		row().width(25).height((Gdx.graphics.getHeight() - 550) / 2); 
 
-		add().width(25);
-		add().width(25);
-		add().width(25);
-		add().width(25);
-		add().width(25);
-		row().height(100);
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
+		
+		row().height((Gdx.graphics.getHeight() - 550) / 2);
+
+
+		row().width(25).height((Gdx.graphics.getHeight() - 550) / 2); 
+
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
+		add().width((float) ((Gdx.graphics.getWidth() * 0.6) / 7));
 		
 		align(Align.center);
 		pack();

@@ -36,7 +36,6 @@ public class TitleScreen implements Screen {
 	
 	public TitleScreen(final MyGame game) {
 		this.game = game;
-		skin = new Skin(Gdx.files.internal("ui/glassy-ui.json"));
 		Render.batch = game.batch;
 		music.setLooping(true);
 		music.play();
@@ -52,7 +51,7 @@ public class TitleScreen implements Screen {
 		table.setFillParent(true);
 		//creo table que contenga los 4 botones
 		//añado los listeners a los botones para que me identifique el mouse
-		AgregarBoton("Jugar").addListener(new ClickListener() {
+		Button.addButton("Jugar",table, 300, 60, Gdx.graphics.getBackBufferWidth() / 2, Gdx.graphics.getHeight() / 2).addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				
@@ -63,13 +62,13 @@ public class TitleScreen implements Screen {
 		});
 		
 		
-		AgregarBoton("Opciones");
+		Button.addButton("Opciones", table, 300, 60, Gdx.graphics.getBackBufferWidth() / 2, Gdx.graphics.getHeight() / 2);
 		//mas tarde se agregaran estas dos screens con sus respectivas interfaces
 		
-		AgregarBoton("Creditos");
+		Button.addButton("Creditos", table, 300, 60, Gdx.graphics.getBackBufferWidth() / 2, Gdx.graphics.getHeight() / 2);
 		
 		
-		AgregarBoton("Salir").addListener(new ClickListener() {
+		Button.addButton("Salir", table, 300, 60, Gdx.graphics.getBackBufferWidth() / 2, Gdx.graphics.getHeight() / 2).addListener(new ClickListener() {
 			@Override		
 			public void clicked(InputEvent event, float x, float y) {
 				((Game)Gdx.app.getApplicationListener()).setScreen(new QuitScreen(game));
@@ -78,14 +77,6 @@ public class TitleScreen implements Screen {
 			}
 	});
 		Gdx.input.setInputProcessor(stage);
-	}
-
-	private TextButton AgregarBoton(String name) {
-		TextButton button = new TextButton(name,skin); // importe una skin bien fea para testeo
-		table.add(button).width(300).height(60).padBottom(20);
-		table.row();
-		return button;
-		//este metodo sirve para crear los botones y para que cuando los llame se agreguen a una table
 	}
 	
 	

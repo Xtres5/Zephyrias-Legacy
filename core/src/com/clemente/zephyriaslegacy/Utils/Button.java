@@ -4,6 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
@@ -15,36 +17,15 @@ public class Button {
 	TextButtonStyle textButtonStyle;
 	BitmapFont font;
 	String text;
+	static Skin skin = new Skin(Gdx.files.internal("ui/glassy-ui.json"));
 	
-	public Button(String text) {
-		this.text = text;
-		stage = new Stage();
-		Gdx.input.setInputProcessor(stage);
-		font = new BitmapFont();
-		textButtonStyle = new TextButtonStyle();
-		textButtonStyle.font = font;
-		font.getData().setScale(4, 4);
-		button = new TextButton(text, textButtonStyle);
-		stage.addActor(button);
-		Gdx.input.setInputProcessor(stage);
-	}
-	
-	
-	
-	public void render() {      
-        stage.draw();
-    }
-	
-	public void setButtonPosition(int x, int y) {
+	public static TextButton addButton(String name, Table table, int width, int height, int x, int y) {
+		TextButton button = new TextButton(name,skin); // importe una skin bien fea para testeo
+		table.add(button).width(width).height(height).padBottom(20);
 		button.setPosition(x, y);
-	}
-	
-	public int getButtonHeight() {
-		return (int) button.getHeight();
-	}
-	
-	public int getButtonWidth() {
-		return (int) button.getWidth();
+		table.row();
+		return button;
+		//este metodo sirve para crear los botones y para que cuando los llame se agreguen a una table
 	}
 
 }
