@@ -57,7 +57,6 @@ public class TitleScreen implements Screen {
 				
 				((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen(game));
 				dispose();
-				Gdx.input.setInputProcessor(null);
 				}
 		});
 		

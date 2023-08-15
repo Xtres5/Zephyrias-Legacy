@@ -36,14 +36,13 @@ public class GameScreen implements Screen{
 //	OrthographicCamera camera;
 	
 	public GameScreen(final MyGame game) {
-		System.out.println("kupa puto");
 		this.game = game;
 		Render.batch = game.batch;
 		viewport = new ScreenViewport();
 		stage = new Stage(viewport, Render.batch);
 		board = new Board();
 		akali = new Akali();
-//		stage.addActor(board);
+		stage.addActor(board);
 		stage.addActor(akali);
 		viewport.getCamera();
 //		camera = new OrthographicCamera();
