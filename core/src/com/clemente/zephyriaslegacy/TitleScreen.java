@@ -36,7 +36,7 @@ public class TitleScreen implements Screen {
 	
 	public TitleScreen(final MyGame game) {
 		this.game = game;
-		Render.batch = game.batch;
+//		Render.batch = game.batch;
 		music.setLooping(true);
 		music.play();
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
@@ -85,9 +85,9 @@ public class TitleScreen implements Screen {
 		//limpiamos la screen
 		ScreenUtils.clear(0, 0, 0.2f, 1);
 		
-		game.batch.begin();
-		game.batch.draw(titleScreenBackground, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
-		game.batch.end();
+		Render.batch.begin();
+		Render.batch.draw(titleScreenBackground, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
+		Render.batch.end();
 		//renderizamos y dibujamos el stage
 		stage.act();
 		stage.draw();

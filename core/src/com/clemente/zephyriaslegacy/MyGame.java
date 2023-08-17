@@ -13,13 +13,11 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.clemente.zephyriaslegacy.Utils.Render;
 
 public class MyGame extends Game {
-	SpriteBatch batch;
-	Sprite cardFront;
-	Sprite cardBack;
+//	SpriteBatch batch;
 	
 	@Override
 	public void create () {
-		this.batch = new SpriteBatch();
+		Render.batch = new SpriteBatch();
 //		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		this.setScreen(new TitleScreen(this));
 		Pixmap pixmap = new Pixmap(Gdx.files.internal("img/peter.png"));
@@ -38,6 +36,6 @@ public class MyGame extends Game {
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
+		Render.batch.dispose();
 	}
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.clemente.zephyriaslegacy.Utils.Render;
 
 public class QuitScreen implements Screen {
 	final MyGame game;
@@ -23,9 +24,9 @@ public class QuitScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		game.batch.begin();
-		game.batch.draw(quitscreen, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		game.batch.end();
+		Render.batch.begin();
+		Render.batch.draw(quitscreen, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		Render.batch.end();
 		
 		if (music.isPlaying() == false) {
 			Gdx.app.exit();

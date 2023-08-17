@@ -25,7 +25,7 @@ public class LoadingScreen implements Screen {
 	public LoadingScreen(final MyGame game) {
 		this.game = game;
 	//	viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		Render.batch = game.batch;
+//		Render.batch = game.batch;
 
 		}
 	
@@ -39,9 +39,9 @@ public class LoadingScreen implements Screen {
 	@Override
 	public void render(float delta) {
 		ScreenUtils.clear(0, 0 ,0 ,0);
-		game.batch.begin();
-		game.batch.draw(Background , 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		game.batch.end();
+		Render.batch.begin();
+		Render.batch.draw(Background , 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		Render.batch.end();
 		
 	}
 

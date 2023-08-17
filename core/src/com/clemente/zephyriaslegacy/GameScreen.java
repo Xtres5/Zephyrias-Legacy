@@ -32,18 +32,17 @@ public class GameScreen implements Screen{
 	private Viewport viewport;
 	public Stage stage;
 	Board board;
-	Akali akali;
+	Player player = new Player();
 //	OrthographicCamera camera;
 	
 	public GameScreen(final MyGame game) {
 		this.game = game;
-		Render.batch = game.batch;
+//		Render.batch = game.batch;
 		viewport = new ScreenViewport();
 		stage = new Stage(viewport, Render.batch);
 		board = new Board();
-		akali = new Akali();
 		stage.addActor(board);
-		stage.addActor(akali);
+		stage.addActor(player);
 		viewport.getCamera();
 //		camera = new OrthographicCamera();
 //		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

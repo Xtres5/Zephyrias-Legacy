@@ -43,19 +43,20 @@ public abstract class Card extends Table {
 		setFillParent(false);
 		setBounds(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), getWidth(), getHeight());
 		
-		add(Integer.toString(manaCost)).width(75).height(75).getActor().setAlignment(Align.center); 
-		add(); 
-		add("").width(75).height(75).getActor().setAlignment(Align.center); 
+		setBackground(new TextureRegionDrawable(new TextureRegion(cardFrame)));
+		
+		add(Integer.toString(manaCost)).height(25).width(25).getActor().setAlignment(Align.bottomRight); 
+		add();
+		add("").getActor().setAlignment(Align.center); 
 		row(); 
 
 		add();
-		add(image).growX().height(Value.percentHeight(1f).get(image) - 75)
-        .getActor().setAlign(Align.center); 
+		add(image).growX().getActor().setAlign(Align.center); 
 		add();
 		row(); 
 
 		add();
-		add(name).grow().height(40).getActor().setAlignment(Align.center);
+		add(name).grow().getActor().setAlignment(Align.center);
 		add();
 		row();
 
@@ -64,12 +65,12 @@ public abstract class Card extends Table {
 		add();
 		row();
 
-		add(Integer.toString(damage)).width(75).height(75).getActor().setAlignment(Align.center);
-		add("Heroe").growX().fillY().getActor().setAlignment(Align.center);
-		add(Integer.toString(health)).width(75).height(75).getActor().setAlignment(Align.center);
+		add(Integer.toString(damage)).height(25).width(25).getActor().setAlignment(Align.topRight);
+		add().growX().fillY().getActor();
+		add(Integer.toString(health)).height(25).width(25).getActor().setAlignment(Align.topLeft);
 			
 		// establezco el background que tiene que ser una textura drawable para no usar una skin.
-		setBackground(new TextureRegionDrawable(new TextureRegion(cardFrame)));
+		
 		
 		pack();
 		setTouchable(Touchable.enabled);
