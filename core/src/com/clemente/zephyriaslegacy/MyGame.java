@@ -11,9 +11,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.clemente.zephyriaslegacy.Utils.Render;
-
+import com.clemente.zephyriaslegacy.Utils.WindowSizeManager;
 public class MyGame extends Game {
 //	SpriteBatch batch;
+	final int minWidth = 800; // Set your minimum width
+    final int minHeight = 600;
 	
 	@Override
 	public void create () {
@@ -26,11 +28,12 @@ public class MyGame extends Game {
 		Cursor cursor = Gdx.graphics.newCursor(pixmap, +xHotspot, yHotspot);
 		pixmap.dispose(); // We don't need the pixmap anymore
 		Gdx.graphics.setCursor(cursor);
-		
+		Gdx.graphics.setWindowedMode(minWidth, minHeight);
 	}
 
 	@Override
 	public void render () {
+		WindowSizeManager.checkAndSetMinWindowSize();
 		super.render();
 	}
 	

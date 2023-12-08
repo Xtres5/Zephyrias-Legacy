@@ -21,14 +21,17 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.clemente.zephyriaslegacy.Utils.Button;
 import com.clemente.zephyriaslegacy.Utils.Render;
+import com.clemente.zephyriaslegacy.Utils.WindowSizeManager;
 import com.clemente.zephyriaslegacy.Cards.Card;
 import com.clemente.zephyriaslegacy.Cards.Cards.Akali;
 import com.clemente.zephyriaslegacy.Cards.Deck;
 
 public class GameScreen implements Screen{
+	final int minWidth = 800;
+	final int minHeight = 600;
 	Texture GameScreenBackground = new Texture("img/GameScreenBackground.png");
 	final MyGame game;
-//	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/danzakuduro.mp3"));
+	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/danzakuduro.mp3"));
 	private Viewport viewport;
 	public Stage stage;
 	Board board;
@@ -40,8 +43,7 @@ public class GameScreen implements Screen{
 //		Render.batch = game.batch;
 		viewport = new ScreenViewport();
 		stage = new Stage(viewport, Render.batch);
-		board = new Board();
-		stage.addActor(board);
+		stage.addActor(new Board());
 		stage.addActor(player);
 		viewport.getCamera();
 //		camera = new OrthographicCamera();
@@ -72,9 +74,10 @@ public class GameScreen implements Screen{
 	@Override
 	public void render(float delta) {
 		ScreenUtils.clear(0, 0, 0.2f, 1);
+		WindowSizeManager.checkAndSetMinWindowSize();
 		viewport.apply(true);
 		Render.batch.begin();
-		Render.batch.draw(GameScreenBackground, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
+		Render.batch.draw(GameScreenBackground, 0, 0, viewport.getScreenWidth(), viewport.getScreenHeight());
 		Render.batch.end();
 		stage.act();
 		stage.draw();
@@ -84,10 +87,11 @@ public class GameScreen implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
-		viewport.update(width, height);
-		
-	}
+		width = Math.max(width, minWidth);
+	    height = Math.max(height, minHeight);
 
+	    viewport.update(width, height, true);
+	}
 	@Override
 	public void pause() {
 		
@@ -111,6 +115,7 @@ public class GameScreen implements Screen{
 //		music.stop();
 		
 	}
+	
 	}
 
 

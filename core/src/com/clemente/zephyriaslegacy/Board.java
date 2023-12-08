@@ -3,55 +3,53 @@ package com.clemente.zephyriaslegacy;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Value;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.clemente.zephyriaslegacy.Cards.Card;
 import com.clemente.zephyriaslegacy.Cards.Cards.Akali;
 import com.clemente.zephyriaslegacy.Cards.Cards.Veigar;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
+import com.clemente.zephyriaslegacy.Cards.Card;
 
 public class Board extends Table {
-	
-	private Skin skin = new Skin(Gdx.files.internal("ui/glassy-ui.json"));
-	public Texture cardFrame = new Texture("img/GameScreenBackground.png");
-	Card blueTeam[] = new Card[5];
-	Card redTeam[] = new Card[5];
-	
-	public Board() {
-		
-		setFillParent(true);
-		row().height((Gdx.graphics.getHeight() - 575) / 2);
+    private final int playerCardSlots = 5; // Number of card slots per player
+    private Card[] blueTeamCards = new Card[playerCardSlots];
+    private Card[] redTeamCards = new Card[playerCardSlots];
 
+    public Board() {
+        // Create a table to hold the card slots for both players
+        Table playerCardTable = new Table();
 
-		row().width(25).height((Gdx.graphics.getHeight() - 575) / 2);
+        // Calculate the desired height of each row based on screen height
+        float rowHeight = Gdx.graphics.getHeight() / 5f;
 
-		add(blueTeam[0]).padRight(35).width((float) ((Gdx.graphics.getWidth() * 0.6) / 6));
-		add(blueTeam[1]).padRight(35).width((float) ((Gdx.graphics.getWidth() * 0.6) / 6));
-		add(blueTeam[2]).padRight(35).width((float) ((Gdx.graphics.getWidth() * 0.6) / 6));
-		add(blueTeam[3]).padRight(35).width((float) ((Gdx.graphics.getWidth() * 0.6) / 6));
-		add(blueTeam[4]).width((float) ((Gdx.graphics.getWidth() * 0.6) / 6));
+        // Calculate the width of each column based on screen width
+        float columnWidth = Gdx.graphics.getWidth() / (playerCardSlots * 2f);
 
-		
-		row().padTop(20).height((Gdx.graphics.getHeight() - 575) / 2);
+        // Loop to create card slots for each player
+        for (int i = 0; i < playerCardSlots; i++) {
+            // Here, you can initialize your card slots array for each player
+            blueTeamCards[i] = new Akali(); // Example: Create a new card instance for blue team
+            playerCardTable.add(blueTeamCards[i]).width(columnWidth).height(rowHeight).pad(10);
 
+            redTeamCards[i] = new Veigar(); // Example: Create a new card instance for red team
+            playerCardTable.add(redTeamCards[i]).width(columnWidth).height(rowHeight).pad(10);
+        }
 
-		row().padTop(20).width(25).height((Gdx.graphics.getHeight() - 575) / 2); 
+        // Set the position of the card table
+        playerCardTable.setPosition((Gdx.graphics.getWidth() - playerCardTable.getWidth()) / 2f,
+                                    (Gdx.graphics.getHeight() - playerCardTable.getHeight()) / 2f);
 
-		add(redTeam[0]).padRight(35).width((float) ((Gdx.graphics.getWidth() * 0.6) / 6));
-		add(redTeam[1]).padRight(35).width((float) ((Gdx.graphics.getWidth() * 0.6) / 6));
-		add(redTeam[2]).padRight(35).width((float) ((Gdx.graphics.getWidth() * 0.6) / 6));
-		add(redTeam[3]).padRight(35).width((float) ((Gdx.graphics.getWidth() * 0.6) / 6));
-		add(redTeam[4]).width((float) ((Gdx.graphics.getWidth() * 0.6) / 6));
-		
-		align(Align.center);
-		pack();
-		setPosition(0, 0);	
-		setDebug(true);
-	}
+        // Add the card table to this Board table
+        add(playerCardTable).center().expand().fill();
 
+        align(Align.center);
+        pack(); // Pack the table to resize it based on its content
+        setFillParent(true); // Make the table fill the whole stage
+        setDebug(true); // Display debug lines to visualize the table layout
+    }
 }
+
+
