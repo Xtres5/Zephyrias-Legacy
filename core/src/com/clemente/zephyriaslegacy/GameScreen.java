@@ -31,7 +31,6 @@ public class GameScreen implements Screen{
 	final int minHeight = 600;
 	Texture GameScreenBackground = new Texture("img/GameScreenBackground.png");
 	final MyGame game;
-	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/danzakuduro.mp3"));
 	private Viewport viewport;
 	public Stage stage;
 	Board board;

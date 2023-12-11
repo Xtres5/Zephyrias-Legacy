@@ -25,9 +25,9 @@ import com.clemente.zephyriaslegacy.Utils.Button;
 import com.clemente.zephyriaslegacy.Utils.Render;
 
 public class TitleScreen implements Screen {
-	Texture titleScreenBackground = new Texture("img/titlescreen.png");
+	Texture titleScreenBackground = new Texture("img/Background.jpg");
 	final MyGame game;
-	private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/titlescreenmusic.mp3")); //best music
+	public static Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/Tavern-music.mp3")); //best music
 	private Stage stage;
 	private Table table;
 	private Skin skin;
@@ -61,8 +61,14 @@ public class TitleScreen implements Screen {
 		});
 		
 		
-		Button.addButton("Opciones", table, 300, 60, Gdx.graphics.getBackBufferWidth() / 2, Gdx.graphics.getHeight() / 2);
-		//mas tarde se agregaran estas dos screens con sus respectivas interfaces
+		Button.addButton("Opciones", table, 300, 60, Gdx.graphics.getBackBufferWidth() / 2, Gdx.graphics.getHeight() / 2).addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+			
+			((Game)Gdx.app.getApplicationListener()).setScreen(new OptionScreen(game));
+			dispose();
+			}
+		});
 		
 		Button.addButton("Creditos", table, 300, 60, Gdx.graphics.getBackBufferWidth() / 2, Gdx.graphics.getHeight() / 2);
 		
@@ -118,7 +124,7 @@ public class TitleScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		music.stop();
+		
 		// TODO Auto-generated method stub
 		
 	}
