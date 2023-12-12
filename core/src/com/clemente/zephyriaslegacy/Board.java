@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.Align;
 import com.clemente.zephyriaslegacy.Cards.Card;
 import com.clemente.zephyriaslegacy.Cards.Cards.Akali;
 import com.clemente.zephyriaslegacy.Cards.Cards.Veigar;
+import com.clemente.zephyriaslegacy.Online.GameClient;
 
 public class Board extends Table {
     private final int playerCardColumns = 5; // Number of card columns per player
@@ -91,6 +92,7 @@ public class Board extends Table {
             public void clicked(InputEvent event, float x, float y) {
                 // Handle card click (e.g., for attacking)
                 System.out.println("Card Clicked: " + "lol");
+				
             }
         });
 
@@ -99,6 +101,7 @@ public class Board extends Table {
         sourceTable.addActor(card); // Add the card to the source table
 
         card.addListener(new DragAndDropListener(card, sourceTable, targetTable));
+        
     }
 
     private class DragAndDropListener extends ClickListener {
@@ -116,10 +119,10 @@ public class Board extends Table {
         public void touchDragged(InputEvent event, float x, float y, int pointer) {
             if (card.isMovable()) {
                 card.setMovable(false); // Disable further dragging until dropped
-
                 Cell cell = sourceTable.getCell(card);
                 if (cell != null && cell.getActor() != null) {
-                    targetTable.add(card).width(card.getWidth()).height(card.getHeight()).pad(10); // Add the card to the target table
+                    targetTable.add(card).width(card.getWidth()).height(card.getHeight()).pad(10);
+                    GameClient.sendCardPosition(x, y);// Add the card to the target table
                     cell.setActor(null); // Remove the card from the source table
                 }
             }

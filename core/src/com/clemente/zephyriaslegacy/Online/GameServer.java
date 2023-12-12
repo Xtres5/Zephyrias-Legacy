@@ -4,43 +4,70 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import com.clemente.zephyriaslegacy.Player;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
-public class GameServer {
+public class GameServer extends Thread {
     private DatagramSocket socket;
     private byte[] buffer;
+    private Map<Integer, InetAddress> clients;
+    private Random random;
 
     public GameServer() {
+        clients = new HashMap<>();
+        buffer = new byte[1024];
+        random = new Random();
+
         try {
-            socket = new DatagramSocket(5000); // Puerto a utilizar
-            buffer = new byte[1024];
-            System.out.println("Servidor iniciado. Esperando jugadores...");
-            
-            while (true) {
-                DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-                socket.receive(packet);
-                
-                // Procesar la información recibida y responder si es necesario
-                System.out.println("Mensaje recibido: " + new String(packet.getData(), 0, packet.getLength()));
-                
-                // Aquí podrías realizar la lógica del juego y la gestión de múltiples conexiones
-                
-                // Por ejemplo, puedes enviar una respuesta al cliente
-                String mensajeRespuesta = "MOVIMIENTO-1-1-1";
-                byte[] mensajeRespuestaBytes = mensajeRespuesta.getBytes();
-                DatagramPacket respuesta = new DatagramPacket(mensajeRespuestaBytes, mensajeRespuestaBytes.length, packet.getAddress(), packet.getPort());
-                socket.send(respuesta);
-            }
-            
-        } catch (Exception e) {
+            socket = new DatagramSocket(5000); // Using port 5000 for communication
+            System.out.println("Server started. Waiting for players...");
+        } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            socket.close();
         }
     }
-    
-    
+
+    public void run() {
+        while (true) {
+            try {
+                DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+                socket.receive(packet);
+
+                InetAddress clientAddress = packet.getAddress();
+
+                if (clients.size() >= 2 && !clients.containsValue(clientAddress)) {
+                    // If there are already two players and a new player tries to connect, close the game for the new player
+                    System.out.println("Lobby is full. Player " + clientAddress + " was rejected.");
+                    String rejectionMessage = "Lobby is full. Please try again later.";
+                    DatagramPacket rejectionPacket = new DatagramPacket(
+                            rejectionMessage.getBytes(),
+                            rejectionMessage.getBytes().length,
+                            clientAddress,
+                            packet.getPort()
+                    );
+                    socket.send(rejectionPacket);
+                    socket.close(); // Close the socket to prevent further connections
+                } else {
+                    int clientId = generateRandomId();
+                    clients.put(clientId, clientAddress);
+                    System.out.println("Player " + clientId + " connected: " + clientAddress);
+
+                    // Process other messages or game-related logic here
+                    System.out.println("Received message: " + new String(packet.getData(), 0, packet.getLength()));
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private int generateRandomId() {
+        return random.nextInt(1000); // Generate a random ID (adjust range as needed)
+    }
+
     public static void main(String[] args) {
-        new GameServer();
+        GameServer server = new GameServer();
+        server.start(); // Start the server thread
     }
 }

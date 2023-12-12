@@ -37,7 +37,7 @@ public abstract class Card extends Table {
 	public Card(String name, String description, int damage, int health, int manaCost, Image image) {
 		super(new Skin(Gdx.files.internal("ui/glassy-ui.json")));
 		this.image = image;
-		this.cardID = contadorIDs++;
+		this.cardID = 999111999;
 		setFillParent(false);
 		setBounds(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), getWidth(), getHeight());
 		
