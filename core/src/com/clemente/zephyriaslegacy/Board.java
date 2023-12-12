@@ -97,17 +97,19 @@ public class Board extends Table {
     }
     
     public void agregarCartaAlTablero(Card carta) {
-        // Lógica para agregar una carta al tablero
+        
         cartasEnElTablero.add(carta);
     }
     
     public void moverCarta(int cardID, int nuevaX, int nuevaY) {
+    	System.out.println("recibido");
         for (Card card : cartasEnElTablero) {
-            if (card.getCardID() == cardID) {
+        	 
                 // Encuentra la carta por su ID y actualiza su posición en el tablero
                 card.setPosition(nuevaX, nuevaY);
+                System.out.println("recibido");
                 break;
-            }
+            
         }
     }
 

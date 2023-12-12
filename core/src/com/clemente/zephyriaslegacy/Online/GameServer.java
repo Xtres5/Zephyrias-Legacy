@@ -26,7 +26,7 @@ public class GameServer {
                 // Aquí podrías realizar la lógica del juego y la gestión de múltiples conexiones
                 
                 // Por ejemplo, puedes enviar una respuesta al cliente
-                String mensajeRespuesta = "Mensaje recibido por el servidor.";
+                String mensajeRespuesta = "MOVIMIENTO-1-1-1";
                 byte[] mensajeRespuestaBytes = mensajeRespuesta.getBytes();
                 DatagramPacket respuesta = new DatagramPacket(mensajeRespuestaBytes, mensajeRespuestaBytes.length, packet.getAddress(), packet.getPort());
                 socket.send(respuesta);
@@ -38,6 +38,7 @@ public class GameServer {
             socket.close();
         }
     }
+    
     
     public static void main(String[] args) {
         new GameServer();

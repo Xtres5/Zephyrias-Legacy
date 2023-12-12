@@ -1,5 +1,7 @@
 package com.clemente.zephyriaslegacy;
 
+import java.net.DatagramPacket;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
@@ -18,17 +20,19 @@ public class GameScreen implements Screen{
 	final MyGame game;
 	private Viewport viewport;
 	public Stage stage;
-	Board board;
+	Board board = new Board();
 	
 //	OrthographicCamera camera;
 	
 	public GameScreen(final MyGame game) {
-		GameClient cliente = new GameClient();
+		GameClient cliente = new GameClient(this::manejarPaquete);
+		cliente.start();
 		this.game = game;
 //		Render.batch = game.batch;
 		viewport = new ScreenViewport();
 		stage = new Stage(viewport, Render.batch);
-		stage.addActor(new Board());
+		stage.addActor(board);
+		
 		viewport.getCamera();
 //		camera = new OrthographicCamera();
 //		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -52,6 +56,15 @@ public class GameScreen implements Screen{
 //			});
 //		Gdx.input.setInputProcessor(stage);
 		//Testeando si me identifica el mouse al tocar la table por ahora no lo usamos mas 
+	}
+	
+	public void manejarPaquete(DatagramPacket dos) {
+
+			System.out.println("mellaman");
+           board.moverCarta(0, 100, 100);
+            
+        
+		
 	}
 	
 	@Override
