@@ -1,7 +1,9 @@
 package com.clemente.zephyriaslegacy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
@@ -11,12 +13,14 @@ import com.badlogic.gdx.utils.Align;
 import com.clemente.zephyriaslegacy.Cards.Card;
 import com.clemente.zephyriaslegacy.Cards.Cards.Akali;
 import com.clemente.zephyriaslegacy.Cards.Cards.Veigar;
+import com.clemente.zephyriaslegacy.Online.GameClient;
 
 public class Board extends Table {
     private final int playerCardColumns = 5; // Number of card columns per player
     private Card[][] blueTeamDeck = new Card[1][playerCardColumns];
     private Card[][] redTeamDeck = new Card[1][playerCardColumns];
     private Cell<Card>[][] centerTableCells = new Cell[2][playerCardColumns];
+    private List<Card> cartasEnElTablero = new ArrayList<>();
 
     public Board() {
         // Create tables for both teams and the center table
@@ -91,6 +95,21 @@ public class Board extends Table {
         // Enable touch events for the card once added to the table
         card.setMovable(true);
     }
+    
+    public void agregarCartaAlTablero(Card carta) {
+        // Lógica para agregar una carta al tablero
+        cartasEnElTablero.add(carta);
+    }
+    
+    public void moverCarta(int cardID, int nuevaX, int nuevaY) {
+        for (Card card : cartasEnElTablero) {
+            if (card.getCardID() == cardID) {
+                // Encuentra la carta por su ID y actualiza su posición en el tablero
+                card.setPosition(nuevaX, nuevaY);
+                break;
+            }
+        }
+    }
 
     private void addDragAndDropListener(Card card, Table sourceTable, Table targetTable) {
         card.addListener(new ClickListener() {
@@ -101,11 +120,18 @@ public class Board extends Table {
             }
         });
 
+        
         card.setMovable(true);
 
         sourceTable.addActor(card); // Add the card to the source table
 
         card.addListener(new DragAndDropListener(card, sourceTable, targetTable));
+    }
+    
+    public void enviarMovimientoAlServidor(Card carta, int x, int y) {
+        int cardID = carta.getCardID();
+        String mensaje = "MOVIMIENTO-" + cardID + "-" + x + "-" + y;
+        GameClient.enviarMensajeAlServidor(mensaje);
     }
 
     private class DragAndDropListener extends ClickListener {

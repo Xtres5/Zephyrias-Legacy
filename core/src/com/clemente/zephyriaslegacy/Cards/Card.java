@@ -21,6 +21,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public abstract class Card extends Table {
+	private static int contadorIDs = 0;
+    protected int cardID;
 	protected Image image;
 	public String name;
 	public String description;
@@ -33,10 +35,9 @@ public abstract class Card extends Table {
 	private boolean isMovable = true;
 		
 	public Card(String name, String description, int damage, int health, int manaCost, Image image) {
-
 		super(new Skin(Gdx.files.internal("ui/glassy-ui.json")));
 		this.image = image;
-		
+		this.cardID = contadorIDs++;
 		setFillParent(false);
 		setBounds(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), getWidth(), getHeight());
 		
@@ -104,6 +105,10 @@ public abstract class Card extends Table {
 
     public boolean isMovable() {
         return isMovable;
+    }
+    
+    public int getCardID() {
+        return cardID;
     }
 
     public void setMovable(boolean movable) {

@@ -1,30 +1,15 @@
 package com.clemente.zephyriaslegacy;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.clemente.zephyriaslegacy.Utils.Button;
+import com.clemente.zephyriaslegacy.Online.GameClient;
 import com.clemente.zephyriaslegacy.Utils.Render;
 import com.clemente.zephyriaslegacy.Utils.WindowSizeManager;
-import com.clemente.zephyriaslegacy.Cards.Card;
-import com.clemente.zephyriaslegacy.Cards.Cards.Akali;
-import com.clemente.zephyriaslegacy.Cards.Deck;
 
 public class GameScreen implements Screen{
 	final int minWidth = 800;
@@ -34,22 +19,21 @@ public class GameScreen implements Screen{
 	private Viewport viewport;
 	public Stage stage;
 	Board board;
-	Player player = new Player();
+	
 //	OrthographicCamera camera;
 	
 	public GameScreen(final MyGame game) {
+		GameClient cliente = new GameClient();
 		this.game = game;
 //		Render.batch = game.batch;
 		viewport = new ScreenViewport();
 		stage = new Stage(viewport, Render.batch);
 		stage.addActor(new Board());
-		stage.addActor(player);
 		viewport.getCamera();
 //		camera = new OrthographicCamera();
 //		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 //		music.setLooping(true);
 //		music.play();
-		Player test = new Player();
 		Gdx.input.setInputProcessor(stage);
 		}
 		
