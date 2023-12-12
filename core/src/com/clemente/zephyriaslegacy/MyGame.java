@@ -22,7 +22,7 @@ public class MyGame extends Game {
 		Render.batch = new SpriteBatch();
 //		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		this.setScreen(new TitleScreen(this));
-		Pixmap pixmap = new Pixmap(Gdx.files.internal("img/peter.png"));
+		Pixmap pixmap = new Pixmap(Gdx.files.internal("img/sword.png"));
 		// Set hotspot to the middle of it (0,0 would be the top-left corner)
 		int xHotspot = 15, yHotspot = 15;
 		Cursor cursor = Gdx.graphics.newCursor(pixmap, +xHotspot, yHotspot);
