@@ -30,11 +30,8 @@ public abstract class Card extends Table {
 	public Texture cardFrame = new Texture("img/cardframe.png");
 	public Texture cardImage;
 	protected Skin skin;
-	
-	
-
-	
-	
+	private boolean isMovable = true;
+		
 	public Card(String name, String description, int damage, int health, int manaCost, Image image) {
 
 		super(new Skin(Gdx.files.internal("ui/glassy-ui.json")));
@@ -102,4 +99,16 @@ public abstract class Card extends Table {
 	public void cardDraw() {
 
 	}
+	
+	
+
+    public boolean isMovable() {
+        return isMovable;
+    }
+
+    public void setMovable(boolean movable) {
+        isMovable = movable;
+        setTouchable(movable ? Touchable.enabled : Touchable.disabled);
+    }
+	
 }
