@@ -1,23 +1,16 @@
 package com.clemente.zephyriaslegacy.Online;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.Arrays;
 
 public class GameServer extends Thread {
     private DatagramSocket socket;
     private byte[] buffer;
-    private Map<Integer, InetAddress> clients;
-    private Random random;
 
     public GameServer() {
-        clients = new HashMap<>();
-        buffer = new byte[1024];
-        random = new Random();
+        buffer = new byte[8]; // Assuming card position data consists of 2 floats (8 bytes)
 
         try {
             socket = new DatagramSocket(5000); // Using port 5000 for communication
@@ -33,28 +26,15 @@ public class GameServer extends Thread {
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
                 socket.receive(packet);
 
-                InetAddress clientAddress = packet.getAddress();
+                byte[] receivedData = Arrays.copyOf(packet.getData(), packet.getLength());
 
-                if (clients.size() >= 2 && !clients.containsValue(clientAddress)) {
-                    // If there are already two players and a new player tries to connect, close the game for the new player
-                    System.out.println("Lobby is full. Player " + clientAddress + " was rejected.");
-                    String rejectionMessage = "Lobby is full. Please try again later.";
-                    DatagramPacket rejectionPacket = new DatagramPacket(
-                            rejectionMessage.getBytes(),
-                            rejectionMessage.getBytes().length,
-                            clientAddress,
-                            packet.getPort()
-                    );
-                    socket.send(rejectionPacket);
-                    socket.close(); // Close the socket to prevent further connections
-                } else {
-                    int clientId = generateRandomId();
-                    clients.put(clientId, clientAddress);
-                    System.out.println("Player " + clientId + " connected: " + clientAddress);
+                float cardX = byteArrayToFloat(Arrays.copyOfRange(receivedData, 0, 4));
+                float cardY = byteArrayToFloat(Arrays.copyOfRange(receivedData, 4, 8));
 
-                    // Process other messages or game-related logic here
-                    System.out.println("Received message: " + new String(packet.getData(), 0, packet.getLength()));
-                }
+                System.out.println("Received card position: X=" + cardX + ", Y=" + cardY);
+
+                // Implement logic to relay the received card position to the other client(s)
+                relayCardPosition(packet.getData(), packet.getLength(), packet.getAddress(), packet.getPort());
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -62,8 +42,18 @@ public class GameServer extends Thread {
         }
     }
 
-    private int generateRandomId() {
-        return random.nextInt(1000); // Generate a random ID (adjust range as needed)
+    private void relayCardPosition(byte[] data, int length, InetAddress senderAddress, int senderPort) throws IOException {
+        // Assuming you have the addresses and ports of the other clients stored somewhere
+        // Replace these with the actual addresses and ports of the other client(s)
+        InetAddress receiverAddress = senderAddress; // Replace this with the actual receiver's address
+        int receiverPort = senderPort; // Replace this with the actual receiver's port
+
+        DatagramPacket relayPacket = new DatagramPacket(data, length, receiverAddress, receiverPort);
+        socket.send(relayPacket);
+    }
+
+    private float byteArrayToFloat(byte[] bytes) {
+        return java.nio.ByteBuffer.wrap(bytes).getFloat();
     }
 
     public static void main(String[] args) {
