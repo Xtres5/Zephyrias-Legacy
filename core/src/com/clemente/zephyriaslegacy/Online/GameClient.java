@@ -24,7 +24,7 @@ public class GameClient extends Thread {
         try {
         	
             socket = new DatagramSocket();
-            address = InetAddress.getByName("127.0.0.1"); // Cambia esta dirección por la del servidor en LAN
+            address = InetAddress.getByName("192.168.0.1"); // Cambia esta dirección por la del servidor en LAN
 
             // Envío de mensaje al servidor
             String mensaje = "Hola, servidor!";

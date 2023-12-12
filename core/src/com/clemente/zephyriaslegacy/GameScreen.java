@@ -61,7 +61,7 @@ public class GameScreen implements Screen{
 	public void manejarPaquete(DatagramPacket dos) {
 
 			System.out.println("mellaman");
-           board.moverCarta(0, 100, 100);
+            board.moverCarta(0, 100, 100);
             
         
 		
