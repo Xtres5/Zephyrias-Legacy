@@ -9,13 +9,12 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.clemente.zephyriaslegacy.Online.GameClient;
+import com.clemente.zephyriaslegacy.Online.UtilsOnline;
+import com.clemente.zephyriaslegacy.Online.Cliente.ClientThread;
 import com.clemente.zephyriaslegacy.Utils.Render;
 import com.clemente.zephyriaslegacy.Utils.WindowSizeManager;
 
 public class GameScreen implements Screen{
-	final int minWidth = 800;
-	final int minHeight = 600;
 	Texture GameScreenBackground = new Texture("img/GameScreenBackground.png");
 	final MyGame game;
 	private Viewport viewport;
@@ -25,8 +24,8 @@ public class GameScreen implements Screen{
 //	OrthographicCamera camera;
 	
 	public GameScreen(final MyGame game) {
-		GameClient cliente = new GameClient(this::manejarPaquete);
-		cliente.start();
+		UtilsOnline.client = new ClientThread(this);
+		UtilsOnline.client.start();
 		this.game = game;
 //		Render.batch = game.batch;
 		viewport = new ScreenViewport();
@@ -83,10 +82,12 @@ public class GameScreen implements Screen{
 
 	@Override
 	public void resize(int width, int height) {
-		width = Math.max(width, minWidth);
-	    height = Math.max(height, minHeight);
 
 	    viewport.update(width, height, true);
+	}
+	
+	public Board getBoard() {
+		return this.board;
 	}
 	@Override
 	public void pause() {

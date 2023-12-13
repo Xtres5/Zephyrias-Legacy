@@ -1,8 +1,10 @@
 package com.clemente.zephyriaslegacy.Online;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 public class GameServer extends Thread {
@@ -13,7 +15,7 @@ public class GameServer extends Thread {
         buffer = new byte[8]; // Assuming card position data consists of 2 floats (8 bytes)
 
         try {
-            socket = new DatagramSocket(5000); // Using port 5000 for communication
+            socket = new DatagramSocket(6000); // Using port 6000 for communication
             System.out.println("Server started. Waiting for players...");
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,7 +35,6 @@ public class GameServer extends Thread {
 
                 System.out.println("Received card position: X=" + cardX + ", Y=" + cardY);
 
-                // Implement logic to relay the received card position to the other client(s)
                 relayCardPosition(packet.getData(), packet.getLength(), packet.getAddress(), packet.getPort());
 
             } catch (IOException e) {
@@ -43,12 +44,12 @@ public class GameServer extends Thread {
     }
 
     private void relayCardPosition(byte[] data, int length, InetAddress senderAddress, int senderPort) throws IOException {
-        // Assuming you have the addresses and ports of the other clients stored somewhere
-        // Replace these with the actual addresses and ports of the other client(s)
-        InetAddress receiverAddress = senderAddress; // Replace this with the actual receiver's address
-        int receiverPort = senderPort; // Replace this with the actual receiver's port
+        // Logic for forwarding the received card position to other client(s) goes here
+        // For example, you might have a list of client addresses and ports
+        // Loop through the list and send the data to each client, except the sender
 
-        DatagramPacket relayPacket = new DatagramPacket(data, length, receiverAddress, receiverPort);
+        // Dummy example of sending the data back to the sender
+        DatagramPacket relayPacket = new DatagramPacket(data, length, senderAddress, senderPort);
         socket.send(relayPacket);
     }
 

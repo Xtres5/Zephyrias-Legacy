@@ -22,7 +22,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public abstract class Card extends Table {
 	private static int contadorIDs = 0;
-    protected int cardID;
+    public int cardID;
 	protected Image image;
 	public String name;
 	public String description;
@@ -37,7 +37,7 @@ public abstract class Card extends Table {
 	public Card(String name, String description, int damage, int health, int manaCost, Image image) {
 		super(new Skin(Gdx.files.internal("ui/glassy-ui.json")));
 		this.image = image;
-		this.cardID = 999111999;
+		this.cardID = contadorIDs++;
 		setFillParent(false);
 		setBounds(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), getWidth(), getHeight());
 		
